@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthenticationService } from '../../authentication/authentication.service';
 import { I18nService } from '../../i18n.service';
+import { PlaceService } from '../../place.service';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,17 @@ import { I18nService } from '../../i18n.service';
 export class HeaderComponent implements OnInit {
 
   menuHidden = true;
+  places = [
+    'Vladivostok',
+    'Moscow',
+    'Saint Petersburg',
+    'Paris'
+  ];
 
   constructor(private router: Router,
               private authenticationService: AuthenticationService,
-              private i18nService: I18nService) { }
+              private i18nService: I18nService,
+              private placeService: PlaceService) { }
 
   ngOnInit() { }
 
@@ -27,9 +35,17 @@ export class HeaderComponent implements OnInit {
     this.i18nService.language = language;
   }
 
+  setPlace(place: string) {
+    this.placeService.place = place;
+  }
+
   logout() {
     this.authenticationService.logout()
       .subscribe(() => this.router.navigate(['/login'], { replaceUrl: true }));
+  }
+
+  get currentPlace(): string {
+    return this.placeService.place;
   }
 
   get currentLanguage(): string {

@@ -10,7 +10,14 @@ export const environment = {
   production: false,
   version: env.npm_package_version + '-dev',
   serverUrl: '/api',
+  weatherUrl: `https://api.openweathermap.org/data/2.5`,
+  weather: {
+    appId: '9e240b063640d0cf77e34d75db435670',
+    units: 'metric'
+  },
+  googleApiKey: 'AIzaSyBo4yWCRMfC64H6Qqr-xsOZHskgy4nMPx4',
   defaultLanguage: 'en-US',
+  defaultGeo: 'Vladivostok',
   supportedLanguages: [
     'en-US',
     'fr-FR'

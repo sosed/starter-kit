@@ -12,5 +12,7 @@
   "Username is required": "Identifiant requis",
   "Username or password incorrect.": "Identifiant ou mot de passe incorrect.",
   "Remember me": "Rester connecté",
-  "Version": "Version"
+  "Version": "Version",
+  "Weather": "Météo",
+  "WEATHER_PAGE_TITLE": "Météo actuelle et prévisions dans votre ville"
 }

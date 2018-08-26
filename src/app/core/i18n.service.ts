@@ -5,6 +5,7 @@ import { includes } from 'lodash';
 import { Logger } from './logger.service';
 import * as enUS from '../../translations/en-US.json';
 import * as frFR from '../../translations/fr-FR.json';
+import { BehaviorSubject } from 'rxjs';
 
 const log = new Logger('I18nService');
 const languageKey = 'language';
@@ -24,6 +25,7 @@ export class I18nService {
 
   defaultLanguage: string;
   supportedLanguages: string[];
+  language$ = new BehaviorSubject<string>('');
 
   constructor(private translateService: TranslateService) {
     // Embed languages to avoid extra HTTP requests
@@ -70,6 +72,7 @@ export class I18nService {
 
     log.debug(`Language set to ${language}`);
     this.translateService.use(language);
+    this.language$.next(language);
   }
 
   /**

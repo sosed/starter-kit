@@ -5,13 +5,24 @@ import { Observable } from 'rxjs';
 import { environment } from '@env/environment';
 
 /**
- * Prefixes all requests with `environment.serverUrl`.
+ * Prefixes requests with `environment.serverUrl`.
  */
 @Injectable()
 export class ApiPrefixInterceptor implements HttpInterceptor {
 
+  constructor() {}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    request = request.clone({ url: environment.serverUrl + request.url });
+    if (request.url.includes('openweathermap.org')) {
+      request = request.clone({
+        url: request.url,
+        params: request.params
+          .set('appid', environment.weather.appId)
+          .set('units', environment.weather.units)
+      });
+    } else {
+      request = request.clone({url: environment.serverUrl + request.url});
+    }
     return next.handle(request);
   }
 
