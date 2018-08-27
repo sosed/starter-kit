@@ -22,10 +22,10 @@
       </div>
       <div class="navbar-nav ml-auto">
         <div class="nav-item" ngbDropdown placement="bottom-right">
-          <a id="place-dropdown" class="nav-link" ngbDropdownToggle>{{currentPlace}}</a>
+          <a id="place-dropdown" class="nav-link" ngbDropdownToggle>{{currentPlace | translate}}</a>
           <div ngbDropdownMenu aria-labelledby="place-dropdown">
             <button class="dropdown-item" *ngFor="let place of places" (click)="setPlace(place)">
-              {{place}}
+              {{place | translate}}
             </button>
           </div>
         </div>

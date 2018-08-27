@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { LOCALE_ID, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
@@ -17,6 +17,7 @@ import { ApiPrefixInterceptor } from './http/api-prefix.interceptor';
 import { ErrorHandlerInterceptor } from './http/error-handler.interceptor';
 import { CacheInterceptor } from './http/cache.interceptor';
 import { PlaceService } from '@app/core/place.service';
+import { DynamicLocaleService } from '@app/core/dynamic-locale.service';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { PlaceService } from '@app/core/place.service';
     ErrorHandlerInterceptor,
     CacheInterceptor,
     PlaceService,
+    DynamicLocaleService,
     {
       provide: HttpClient,
       useClass: HttpService
@@ -46,7 +48,11 @@ import { PlaceService } from '@app/core/place.service';
     {
       provide: RouteReuseStrategy,
       useClass: RouteReusableStrategy
-    }
+    },
+    // {
+    //   provide: LOCALE_ID,
+    //   useValue: 'fr-FR'
+    // }
   ]
 })
 export class CoreModule {

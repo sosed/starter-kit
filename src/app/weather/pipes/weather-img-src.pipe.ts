@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { environment } from '@env/environment';
 
 @Pipe({
   name: 'weatherImgSrc'
@@ -9,7 +10,7 @@ export class WeatherImgSrcPipe implements PipeTransform {
     if (!value) {
       return null;
     }
-    return `//openweathermap.org/img/w/${value}.png`;
+    return `${environment.weather.iconUrl}/${value}.png`;
   }
 
 }

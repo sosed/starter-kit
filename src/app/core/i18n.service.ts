@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { includes } from 'lodash';
+import { BehaviorSubject } from 'rxjs';
 
 import { Logger } from './logger.service';
 import * as enUS from '../../translations/en-US.json';
 import * as frFR from '../../translations/fr-FR.json';
-import { BehaviorSubject } from 'rxjs';
+import localeFr from '@angular/common/locales/fr';
+import { DynamicLocaleService } from '@app/core/dynamic-locale.service';
 
 const log = new Logger('I18nService');
 const languageKey = 'language';
+
+registerLocaleData(localeFr);
 
 /**
  * Pass-through function to mark a string for translation extraction.
@@ -27,7 +32,8 @@ export class I18nService {
   supportedLanguages: string[];
   language$ = new BehaviorSubject<string>('');
 
-  constructor(private translateService: TranslateService) {
+  constructor(private translateService: TranslateService,
+              private dynamicLocaleService: DynamicLocaleService) {
     // Embed languages to avoid extra HTTP requests
     translateService.setTranslation('en-US', enUS);
     translateService.setTranslation('fr-FR', frFR);
@@ -45,7 +51,10 @@ export class I18nService {
     this.language = '';
 
     this.translateService.onLangChange
-      .subscribe((event: LangChangeEvent) => { localStorage.setItem(languageKey, event.lang); });
+      .subscribe((event: LangChangeEvent) => {
+        localStorage.setItem(languageKey, event.lang);
+        this.dynamicLocaleService.setLocale(event.lang);
+      });
   }
 
   /**

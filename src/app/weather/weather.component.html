@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="jumbotron text-center">
         <app-loader [isLoading]="!(weather$ | async)"></app-loader>
-        <app-weather-detail *ngIf="(weather$ | async)"
+        <app-weather-detail [hidden]="!(weather$ | async)"
                             [weather]="weather$ | async">
         </app-weather-detail>
     </div>

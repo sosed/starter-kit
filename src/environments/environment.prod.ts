@@ -5,12 +5,12 @@ export const environment = {
   production: true,
   version: env.npm_package_version,
   serverUrl: 'https://api.chucknorris.io',
-  weatherUrl: `https://api.openweathermap.org/data/2.5`,
   weather: {
+    api: 'https://api.openweathermap.org/data/2.5',
     appId: '9e240b063640d0cf77e34d75db435670',
-    units: 'metric'
+    units: 'metric',
+    iconUrl: '//openweathermap.org/img/w'
   },
-  googleApiKey: 'AIzaSyBo4yWCRMfC64H6Qqr-xsOZHskgy4nMPx4',
   defaultLanguage: 'en-US',
   defaultGeo: 'Vladivostok',
   supportedLanguages: [

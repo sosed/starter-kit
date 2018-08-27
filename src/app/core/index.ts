@@ -12,3 +12,4 @@ export * from './route.service';
 export * from './route-reusable-strategy';
 export * from './logger.service';
 export * from './place.service';
+export * from './dynamic-locale.service';
